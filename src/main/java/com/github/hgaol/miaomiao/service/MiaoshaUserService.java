@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class MiaoshaUserService {
 
-
     public static final String COOKI_NAME_TOKEN = "token";
 
     @Autowired
