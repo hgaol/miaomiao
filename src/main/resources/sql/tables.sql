@@ -53,10 +53,10 @@ CREATE TABLE `order_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `miaosha_order` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '秒杀商品表',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
-  `order_id` bigint(20) DEFAULT NULL COMMENT '订单id',
-  `goods_id` bigint(20) DEFAULT NULL COMMENT '商品id',
-  PRIMARY KEY (`id`)
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL COMMENT 'user id',
+  `order_id` bigint(20) DEFAULT NULL COMMENT 'order id',
+  `goods_id` bigint(20) DEFAULT NULL COMMENT 'good id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `u_uid_gid` (`user_id`,`goods_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
