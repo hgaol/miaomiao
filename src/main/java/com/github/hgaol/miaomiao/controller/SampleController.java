@@ -1,6 +1,7 @@
 package com.github.hgaol.miaomiao.controller;
 
 import com.github.hgaol.miaomiao.domain.User;
+import com.github.hgaol.miaomiao.rabbitmq.MQSender;
 import com.github.hgaol.miaomiao.redis.RedisService;
 import com.github.hgaol.miaomiao.redis.UserKey;
 import com.github.hgaol.miaomiao.result.CodeMsg;
@@ -21,6 +22,37 @@ public class SampleController {
 
     @Autowired
     RedisService redisService;
+
+    @Autowired
+    MQSender sender;
+
+    @RequestMapping("/mq/header")
+    @ResponseBody
+    public Result<String> header() {
+        sender.sendHeader("hello,imooc");
+        return Result.success("Hello，world");
+    }
+
+    @RequestMapping("/mq/fanout")
+    @ResponseBody
+    public Result<String> fanout() {
+        sender.sendFanout("hello,imooc");
+        return Result.success("Hello，world");
+    }
+
+    @RequestMapping("/mq/topic")
+    @ResponseBody
+    public Result<String> topic() {
+        sender.sendTopic("hello,imooc");
+        return Result.success("Hello，world");
+    }
+
+    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> mq() {
+        sender.send("hello,imooc");
+        return Result.success("Hello，world");
+    }
 
     @RequestMapping("/hello")
     @ResponseBody
@@ -72,5 +104,5 @@ public class SampleController {
         return Result.success(true);
     }
 
-
 }
+
